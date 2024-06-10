@@ -8,10 +8,12 @@
 module BlueRipple.Data.RDH_Voterfiles
   (
     module BlueRipple.Data.RDH_Voterfiles
+  , module BlueRipple.Data.RDH_Voterfiles_Frames
   )
 where
 
 import qualified BlueRipple.Data.RDH_Voterfiles_Frames as VF
+import BlueRipple.Data.RDH_Voterfiles_Frames
 --import qualified BlueRipple.Data.Types.Demographic as DT
 --import qualified BlueRipple.Data.Types.Geographic as GT
 --import qualified BlueRipple.Data.Small.DataFrames as BR
@@ -54,10 +56,15 @@ import qualified Streamly.Internal.Prelude as Streamly
 
 type VoterFileR = F.RecordColumns VF.VF_Raw
 
-voterfileByTracts :: (K.KnitEffects r, BR.CacheEffects r)
+voterfileByTracts' :: (K.KnitEffects r, BR.CacheEffects r)
                   => BR.DataPath
                   -> Maybe Text
                   -> K.Sem r (K.ActionWithCacheTime r (F.Frame VF.VF_Raw))
-voterfileByTracts dataPath mCacheKey =
+voterfileByTracts' dataPath mCacheKey =
   let cacheKey = fromMaybe "RDH_voterfilesByTract2022.bin" mCacheKey
   in BR.cachedFrameLoader dataPath Nothing Nothing id Nothing cacheKey
+
+voterfileByTracts :: (K.KnitEffects r, BR.CacheEffects r)
+                  => Maybe Text
+                  -> K.Sem r (K.ActionWithCacheTime r (F.Frame VF.VF_Raw))
+voterfileByTracts = voterfileByTracts' (BR.LocalData $ toText VF.voterfileByTract2022CSV)

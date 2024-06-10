@@ -39,10 +39,7 @@ voterFileByTract2022RowGen ::  FS.RowGen
                                'FS.ColumnByName
                                FCU.CommonColumns
 voterFileByTract2022RowGen = FS.modifyColumnSelector modF voterfileByTract2022RowGenAC
-  where modF = FS.renameSomeUsingNames renames . FS.excludeColumns excludes
+  where modF = FS.renameSomeUsingNames renames
 
 renames :: Map FS.HeaderText FS.ColTypeName
 renames = M.fromList [(FS.HeaderText "geoid", FS.ColTypeName "TractGeoId")]
-
-excludes :: Set FS.HeaderText
-excludes = S.fromList [FS.HeaderText "TractId"]
