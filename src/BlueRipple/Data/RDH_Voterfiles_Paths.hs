@@ -9,13 +9,12 @@ module BlueRipple.Data.RDH_Voterfiles_Paths
     module BlueRipple.Data.RDH_Voterfiles_Paths
   )
 where
+
 import qualified BlueRipple.Data.CachingCore as BRC
---import qualified Frames as F
 import qualified Frames.Streamly.TH                     as FS
 import qualified Frames.Streamly.ColumnUniverse         as FCU
 import qualified Data.Text as T
 import qualified Data.Map as M
-import qualified Data.Set as S
 import qualified Language.Haskell.TH.Env as Env
 
 dataDir :: T.Text
