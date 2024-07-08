@@ -21,7 +21,7 @@ dataDir :: T.Text
 dataDir = fromMaybe "../../bigData/RDH-Voterfiles/" $ ($$(Env.envQ "BR_RDH_VOTERFILE_DATA_DIR") :: Maybe String) >>= BRC.insureFinalSlash . toText
 
 voterfileByTract2022CSV :: FilePath
-voterfileByTract2022CSV = toString $ dataDir <> "voterfile_tracts_2022.csv"
+voterfileByTract2022CSV = toString $ dataDir <> "voterfile_tracts_2020_2022.csv"
 
 
 voterfileByTract2022RowGenAC :: FS.RowGen

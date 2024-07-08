@@ -35,7 +35,7 @@ voterfileByTracts' :: (K.KnitEffects r, BR.CacheEffects r)
                   -> Maybe Text
                   -> K.Sem r (K.ActionWithCacheTime r (F.Frame VF.VF_Raw))
 voterfileByTracts' dataPath mCacheKey =
-  let cacheKey = fromMaybe "RDH_voterfilesByTract2022.bin" mCacheKey
+  let cacheKey = fromMaybe "RDH_voterfilesByTract2020_2022.bin" mCacheKey
   in BR.cachedFrameLoader dataPath Nothing Nothing id Nothing cacheKey
 
 voterfileByTracts :: (K.KnitEffects r, BR.CacheEffects r)
