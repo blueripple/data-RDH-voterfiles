@@ -1,6 +1,7 @@
 {-# LANGUAGE CPP #-}
 {-# LANGUAGE FlexibleContexts     #-}
 {-# LANGUAGE OverloadedStrings    #-}
+{-# LANGUAGE TypeApplications        #-}
 {-# LANGUAGE TypeOperators        #-}
 {-# LANGUAGE ScopedTypeVariables  #-}
 {-# OPTIONS_GHC -O0 -freduction-depth=0 #-}
@@ -36,7 +37,8 @@ voterfileByTracts' :: (K.KnitEffects r, BR.CacheEffects r)
                   -> K.Sem r (K.ActionWithCacheTime r (F.Frame VF.VF_Raw))
 voterfileByTracts' dataPath mCacheKey =
   let cacheKey = fromMaybe "RDH_voterfilesByTract2020_2022.bin" mCacheKey
-  in BR.cachedFrameLoader dataPath Nothing Nothing id Nothing cacheKey
+--  in BR.cachedFrameLoader dataPath Nothing Nothing id Nothing cacheKey
+  in BR.cachedMaybeFrameLoader @VoterFileR dataPath Nothing Nothing id id Nothing cacheKey
 
 voterfileByTracts :: (K.KnitEffects r, BR.CacheEffects r)
                   => Maybe Text
